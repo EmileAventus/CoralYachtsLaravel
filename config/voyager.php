@@ -42,8 +42,7 @@ return [
     */
 
     'models' => [
-        //'namespace' => 'App\\',
-        //'namespace' => 'vendor\tcg\voyager\src\Models',
+        'namespace' => 'App\\',
     ],
 
     /*

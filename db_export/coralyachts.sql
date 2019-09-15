@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2019 at 04:42 PM
+-- Generation Time: Sep 15, 2019 at 06:17 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -30,25 +30,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bookings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `Customers_customerID` int(11) DEFAULT NULL,
-  `Yachts_YachtID` int(11) DEFAULT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `paymentstatus` int(11) NOT NULL DEFAULT 1,
-  `paymentpreference` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_start` datetime DEFAULT NULL,
-  `date_end` datetime DEFAULT NULL,
-  `catering` int(11) DEFAULT NULL,
-  `skipper` int(11) DEFAULT NULL,
-  `flottielje` int(11) DEFAULT NULL,
-  `groceries` int(11) DEFAULT NULL,
-  `transfer` int(11) DEFAULT NULL,
-  `insurence` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `childlifejackets` int(11) DEFAULT NULL,
-  `fishinggear` int(11) DEFAULT NULL,
-  `paddleboard` int(11) DEFAULT NULL,
-  `agreedtoterms` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Customers_customerID` int(11) NOT NULL,
+  `Yachts_YachtID` int(11) NOT NULL,
+  `status` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Option',
+  `paymentstatus` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Open',
+  `paymentpreference` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_start` datetime NOT NULL,
+  `date_end` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `catering` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `skipper` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `flottielje` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `groceries` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transfer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `insurence` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `childlifejackets` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fishinggear` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paddleboard` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `agreedtoterms` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -56,7 +56,7 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`id`, `Customers_customerID`, `Yachts_YachtID`, `status`, `paymentstatus`, `paymentpreference`, `date_start`, `date_end`, `catering`, `skipper`, `flottielje`, `groceries`, `transfer`, `insurence`, `childlifejackets`, `fishinggear`, `paddleboard`, `agreedtoterms`, `created_at`, `updated_at`) VALUES
-(7, 1, 1, '123123', 4, '234234', '2019-09-04 00:00:00', '2019-09-26 00:00:00', 1, 1, 1, 1, 1, '1', 1, 1, 1, '1', '2019-09-15 12:07:03', '2019-09-15 12:07:25');
+(8, 1, 1, 'OPTION', 'PENDING', 'asdasd', '2019-08-28 00:00:00', '2019-09-11 00:00:00', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2019-09-15 13:53:03', '2019-09-15 13:57:19');
 
 -- --------------------------------------------------------
 
@@ -90,17 +90,17 @@ INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_a
 
 CREATE TABLE `customers` (
   `id` int(10) UNSIGNED NOT NULL,
-  `firstname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zipcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `interalnotes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zipcode` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `interalnotes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -210,21 +210,21 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (78, 8, 'created_at', 'timestamp', 'Created At', 1, 1, 1, 0, 0, 0, '{}', 15),
 (79, 8, 'updated_at', 'timestamp', 'Updated At', 1, 0, 0, 0, 0, 0, '{}', 16),
 (81, 9, 'id', 'hidden', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(82, 9, 'name', 'text', 'Name', 0, 1, 1, 1, 1, 0, '{}', 2),
-(83, 9, 'city', 'text', 'City', 0, 1, 1, 1, 1, 0, '{}', 3),
-(84, 9, 'country', 'text', 'Country (ISO 3166-2 code)', 0, 1, 1, 1, 1, 0, '{}', 4),
-(85, 9, 'contactperson', 'text', 'Contact person', 0, 1, 1, 1, 1, 0, '{}', 5),
-(86, 9, 'contactphone', 'text', 'Contact phone', 0, 1, 1, 1, 1, 0, '{}', 6),
-(87, 9, 'contactemail', 'text', 'Contact email', 0, 1, 1, 1, 1, 0, '{}', 7),
-(88, 9, 'facilities', 'text', 'Facilities', 0, 1, 1, 1, 1, 0, '{}', 8),
-(89, 9, 'directions', 'text', 'Directions', 0, 1, 1, 1, 1, 0, '{}', 9),
-(90, 9, 'parking', 'text', 'Parking', 0, 1, 1, 1, 1, 0, '{}', 10),
-(91, 9, 'catering', 'number', 'Catering', 0, 1, 1, 1, 1, 0, '{}', 11),
-(92, 9, 'skipper', 'number', 'Skipper', 0, 1, 1, 1, 1, 0, '{}', 12),
-(93, 9, 'groceries', 'number', 'Groceries', 0, 1, 1, 1, 1, 0, '{}', 13),
-(94, 9, 'transfer', 'number', 'Transfer', 0, 1, 1, 1, 1, 0, '{}', 14),
+(82, 9, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 0, '{}', 2),
+(83, 9, 'city', 'text', 'City', 1, 1, 1, 1, 1, 0, '{}', 3),
+(84, 9, 'country', 'text', 'Country (ISO 3166-2 code)', 1, 1, 1, 1, 1, 0, '{}', 4),
+(85, 9, 'contactperson', 'text', 'Contact person', 1, 1, 1, 1, 1, 0, '{}', 5),
+(86, 9, 'contactphone', 'text', 'Contact phone', 1, 1, 1, 1, 1, 0, '{}', 6),
+(87, 9, 'contactemail', 'text', 'Contact email', 1, 1, 1, 1, 1, 0, '{}', 7),
+(88, 9, 'facilities', 'text', 'Facilities', 1, 1, 1, 1, 1, 0, '{}', 8),
+(89, 9, 'directions', 'text', 'Directions', 1, 1, 1, 1, 1, 0, '{}', 9),
+(90, 9, 'parking', 'text', 'Parking', 1, 1, 1, 1, 1, 0, '{}', 10),
+(91, 9, 'catering', 'select_dropdown', 'Catering', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 11),
+(92, 9, 'skipper', 'select_dropdown', 'Skipper', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 12),
+(93, 9, 'groceries', 'select_dropdown', 'Groceries', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 13),
+(94, 9, 'transfer', 'select_dropdown', 'Transfer', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 14),
 (95, 9, 'created_at', 'timestamp', 'Created At', 1, 1, 1, 0, 0, 0, '{}', 15),
-(97, 9, 'updated_at', 'timestamp', 'Updated At', 1, 0, 0, 0, 0, 0, '{}', 16),
+(97, 9, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 16),
 (108, 11, 'id', 'hidden', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (109, 11, 'Yachttypes_yachttypeID', 'hidden', 'Yachttypes YachttypeID', 0, 0, 0, 0, 0, 0, '{}', 3),
 (110, 11, 'Ports_portID', 'hidden', 'Ports PortID', 0, 0, 0, 0, 0, 0, '{}', 6),
@@ -248,28 +248,28 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (128, 12, 'created_at', 'timestamp', 'Created At', 1, 1, 1, 0, 0, 0, '{}', 11),
 (129, 12, 'updated_at', 'timestamp', 'Updated At', 1, 0, 0, 0, 0, 0, '{}', 12),
 (130, 13, 'id', 'hidden', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(131, 13, 'Customers_customerID', 'hidden', 'Customers CustomerID', 0, 0, 0, 0, 0, 0, '{}', 2),
-(132, 13, 'Yachts_YachtID', 'hidden', 'Yachts YachtID', 0, 0, 0, 0, 0, 0, '{}', 4),
-(133, 13, 'status', 'text', 'Status', 0, 1, 1, 1, 1, 0, '{}', 6),
-(134, 13, 'paymentstatus', 'hidden', 'Payment status', 0, 0, 0, 0, 0, 0, '{}', 7),
-(135, 13, 'paymentpreference', 'text', 'Payment preference', 0, 1, 1, 1, 1, 0, '{}', 9),
-(136, 13, 'date_start', 'date', 'Date Start', 0, 1, 1, 1, 1, 0, '{}', 10),
-(137, 13, 'date_end', 'date', 'Date End', 0, 1, 1, 1, 1, 0, '{}', 11),
-(138, 13, 'catering', 'number', 'Catering', 0, 1, 1, 1, 1, 0, '{}', 12),
-(139, 13, 'skipper', 'number', 'Skipper', 0, 1, 1, 1, 1, 0, '{}', 13),
-(140, 13, 'flottielje', 'number', 'Flottielje', 0, 1, 1, 1, 1, 0, '{}', 14),
-(141, 13, 'groceries', 'number', 'Groceries', 0, 1, 1, 1, 1, 0, '{}', 15),
-(142, 13, 'transfer', 'number', 'Transfer', 0, 1, 1, 1, 1, 0, '{}', 16),
-(143, 13, 'insurence', 'text', 'Insurence', 0, 1, 1, 1, 1, 0, '{}', 17),
-(144, 13, 'childlifejackets', 'number', 'Child life jackets', 0, 1, 1, 1, 1, 0, '{}', 18),
-(145, 13, 'fishinggear', 'number', 'Fishing gear', 0, 1, 1, 1, 1, 0, '{}', 19),
-(146, 13, 'paddleboard', 'number', 'Paddle board', 0, 1, 1, 1, 1, 0, '{}', 20),
-(147, 13, 'agreedtoterms', 'text', 'Agreed to terms', 0, 1, 1, 1, 1, 0, '{}', 21),
+(131, 13, 'Customers_customerID', 'hidden', 'Customers CustomerID', 1, 0, 0, 0, 0, 0, '{}', 2),
+(132, 13, 'Yachts_YachtID', 'hidden', 'Yachts YachtID', 1, 0, 0, 0, 0, 0, '{}', 4),
+(133, 13, 'status', 'select_dropdown', 'Status', 1, 1, 1, 1, 0, 0, '{\"options\":{\"OPTION\":\"Option\",\"CONFIRMED\":\"Confirmed\",\"CANCELED\":\"Canceled\"}}', 6),
+(134, 13, 'paymentstatus', 'select_dropdown', 'Payment status', 1, 1, 1, 1, 0, 0, '{\"options\":{\"OPEN\":\"Open\",\"PENDING\":\"Pending\",\"PARTIALLYCOMPLETED\":\"Partilly completed\",\"Completed\":\"Completed\",\"CREDITED\":\"Credited\"}}', 7),
+(135, 13, 'paymentpreference', 'text', 'Payment preference', 1, 1, 1, 1, 1, 0, '{}', 9),
+(136, 13, 'date_start', 'date', 'Date Start', 1, 1, 1, 1, 1, 0, '{}', 10),
+(137, 13, 'date_end', 'date', 'Date End', 1, 1, 1, 1, 1, 0, '{}', 11),
+(138, 13, 'catering', 'select_dropdown', 'Catering', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 12),
+(139, 13, 'skipper', 'select_dropdown', 'Skipper', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 13),
+(140, 13, 'flottielje', 'select_dropdown', 'Flottielje', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 14),
+(141, 13, 'groceries', 'select_dropdown', 'Groceries', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 15),
+(142, 13, 'transfer', 'select_dropdown', 'Transfer', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 16),
+(143, 13, 'insurence', 'select_dropdown', 'Insurence', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 17),
+(144, 13, 'childlifejackets', 'select_dropdown', 'Child life jackets', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 18),
+(145, 13, 'fishinggear', 'select_dropdown', 'Fishing gear', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 19),
+(146, 13, 'paddleboard', 'select_dropdown', 'Paddle board', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 20),
+(147, 13, 'agreedtoterms', 'select_dropdown', 'Agreed to terms', 1, 1, 1, 1, 1, 0, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 21),
 (148, 13, 'created_at', 'timestamp', 'Created At', 1, 1, 1, 0, 0, 0, '{}', 22),
-(149, 13, 'updated_at', 'timestamp', 'Updated At', 1, 0, 0, 0, 0, 0, '{}', 23),
+(149, 13, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 23),
 (150, 13, 'booking_belongsto_customer_relationship', 'relationship', 'Customer', 0, 1, 1, 1, 1, 0, '{\"model\":\"App\\\\Customer\",\"table\":\"customers\",\"type\":\"belongsTo\",\"column\":\"Customers_customerID\",\"key\":\"id\",\"label\":\"firstname\",\"pivot_table\":\"bookings\",\"pivot\":\"0\",\"taggable\":\"0\"}', 3),
 (151, 13, 'booking_hasone_yacht_relationship', 'relationship', 'Yacht', 0, 1, 1, 1, 1, 0, '{\"model\":\"App\\\\Yacht\",\"table\":\"yachts\",\"type\":\"belongsTo\",\"column\":\"Yachts_YachtID\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"bookings\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
-(153, 13, 'booking_hasone_paymentstatusmodel_relationship', 'relationship', 'Payment status', 0, 1, 1, 1, 0, 0, '{\"model\":\"App\\\\Paymentstatusmodel\",\"table\":\"paymentstatusmodel\",\"type\":\"belongsTo\",\"column\":\"paymentstatus\",\"key\":\"id\",\"label\":\"status\",\"pivot_table\":\"bookings\",\"pivot\":\"0\",\"taggable\":\"0\"}', 8);
+(154, 9, 'flottielje', 'select_dropdown', 'Flottielje', 1, 1, 1, 1, 1, 1, '{\"options\":{\"YES\":\"Yes\",\"NO\":\"No\"}}', 13);
 
 -- --------------------------------------------------------
 
@@ -307,10 +307,10 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (5, 'posts', 'posts', 'Post', 'Posts', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', '', '', 1, 0, NULL, '2019-09-14 10:25:18', '2019-09-14 10:25:18'),
 (6, 'pages', 'pages', 'Page', 'Pages', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, '', '', 1, 0, NULL, '2019-09-14 10:25:18', '2019-09-14 10:25:18'),
 (8, 'yachttypes', 'yachttypes', 'Yachttype', 'Yachttypes', NULL, 'App\\Yachttype', NULL, NULL, NULL, 1, 1, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 13:35:40', '2019-09-14 20:03:26'),
-(9, 'ports', 'ports', 'Port', 'Ports', NULL, 'App\\Port', NULL, NULL, NULL, 1, 1, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 14:33:41', '2019-09-14 20:03:49'),
+(9, 'ports', 'ports', 'Port', 'Ports', NULL, 'App\\Port', NULL, NULL, NULL, 1, 1, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 14:33:41', '2019-09-15 14:13:54'),
 (11, 'yachts', 'yachts', 'Yacht', 'Yachts', NULL, 'App\\Yacht', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 15:30:50', '2019-09-15 10:38:33'),
 (12, 'customers', 'customers', 'Customer', 'Customers', NULL, 'App\\Customer', NULL, NULL, NULL, 1, 1, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 19:10:41', '2019-09-14 20:03:43'),
-(13, 'bookings', 'bookings', 'Booking', 'Bookings', NULL, 'App\\Booking', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 19:35:41', '2019-09-15 12:04:40'),
+(13, 'bookings', 'bookings', 'Booking', 'Bookings', NULL, 'App\\Booking', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-09-14 19:35:41', '2019-09-15 14:14:23'),
 (14, 'paymentstatusmodel', 'paymentstatusmodel', 'Paymentstatusmodel', 'Paymentstatusmodels', NULL, 'App\\Paymentstatusmodel', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-09-15 10:45:01', '2019-09-15 10:45:01');
 
 -- --------------------------------------------------------
@@ -463,8 +463,8 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `created_at`, `updated_at`) VALUES
-(2, 1, 'Development Notes: Problems', 'Development notes: problems', '<p>Probleem #1: Dashboard widgets verwijzen naar goede pagina\'s maar geeft verkeerde tekst weer.</p>\r\n<p>Het lijkt erop dat de tekst gebaseerd is op bepaalde Model klassen. Het veranderen van de klasse in de source code werkt niet. Hoewel het model wel bestaat, ontstaat er een error dat het model niet gevonden kan worden.</p>\r\n<p>Tijdelijke oplossing: ?</p>\r\n<p>&nbsp;</p>\r\n<p>Probleem #2: Voyager ondersteunt het type Enum niet.</p>\r\n<p>Tijdelijke oplossing: Enum types veranderd</p>\r\n<p>Yachttypes: type naar varchar (20)</p>\r\n<p>Ports: Elke record met type Enum veranderd naar Integer</p>\r\n<p>Bookings: Bijna hele tabel bestaat uit Enums</p>\r\n<p>Oplossing: Belangrijke Enums krijgen eigen tabel en worden via tabel relaties verbonden.</p>\r\n<p>&nbsp;</p>\r\n<p>Probleem #3: De pagina \'Yachts\' gaat kapot wanneer server-side pagination aan wordt gezet. Over de error melding is echter niks te vinden op 1 thread na: https://github.com/the-control-group/voyager/issues/4406</p>\r\n<p>Zelfde gebeurd met de pagina \'Bookings\'</p>\r\n<p>Tijdelijke oplossing: Geen server-side pagination gebruiken</p>', NULL, 'development-notes-problems', 'Development notes: problems', 'Development notes: problems', 'INACTIVE', '2019-09-14 14:20:00', '2019-09-14 23:18:42'),
-(3, 1, 'Development Notes', 'Development Notes', '<p>Notitie 1: Hoe erg is het wanneer 1 of 2 (volgens de offerte) verplichte records van een tabel mist?</p>\r\n<p>Zie tabel Ports: offerte geeft schoonmaak aan maar deze record is niet in het ERD opgenomen. Momenteel mis ik ook de \"Flottielje\" record.</p>\r\n<p>&nbsp;</p>\r\n<p>Notitie 2: Verwarring in tabel \'Yachttypes\'. Tabel heeft veld genaamd type van het type enum?</p>', NULL, 'development-notes', 'Development Notes', 'Development Notes', 'INACTIVE', '2019-09-14 19:01:35', '2019-09-15 10:11:38');
+(2, 1, 'Development Notes: Problems', 'Development notes: problems', '<p>Probleem #1: Dashboard widgets verwijzen naar goede pagina\'s maar geeft verkeerde tekst weer.</p>\r\n<p>Het lijkt erop dat de tekst gebaseerd is op bepaalde Model klassen. Het veranderen van de klasse in de source code werkt niet. Hoewel het model wel bestaat, ontstaat er een error dat het model niet gevonden kan worden.</p>\r\n<p>Tijdelijke oplossing: ?</p>', NULL, 'development-notes-problems', 'Development notes: problems', 'Development notes: problems', 'INACTIVE', '2019-09-14 14:20:00', '2019-09-15 13:58:01'),
+(3, 1, 'Development Notes', 'Development Notes', NULL, NULL, 'development-notes', 'Development Notes', 'Development Notes', 'INACTIVE', '2019-09-14 19:01:35', '2019-09-15 14:12:18');
 
 -- --------------------------------------------------------
 
@@ -477,28 +477,6 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `paymentstatusmodel`
---
-
-CREATE TABLE `paymentstatusmodel` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `paymentstatusmodel`
---
-
-INSERT INTO `paymentstatusmodel` (`id`, `status`) VALUES
-(1, 'Open'),
-(2, 'Pending'),
-(3, 'Partially completed'),
-(4, 'Completed'),
-(5, 'Credited');
 
 -- --------------------------------------------------------
 
@@ -681,30 +659,31 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `ports` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contactperson` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contactphone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contactemail` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `facilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `directions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parking` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `catering` int(11) DEFAULT NULL,
-  `skipper` int(11) DEFAULT NULL,
-  `groceries` int(11) DEFAULT NULL,
-  `transfer` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contactperson` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contactphone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contactemail` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facilities` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `directions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parking` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `catering` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `skipper` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `flottielje` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `groceries` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transfer` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ports`
 --
 
-INSERT INTO `ports` (`id`, `name`, `city`, `country`, `contactperson`, `contactphone`, `contactemail`, `facilities`, `directions`, `parking`, `catering`, `skipper`, `groceries`, `transfer`, `created_at`, `updated_at`) VALUES
-(2, 'Port Haven', 'Apeldoorn', 'NL', 'Willem', '0612345678', 'Willem@willem.com', 'Industrial Complex', '1', '1', 1, 1, 1, 1, '2019-09-14 14:51:59', '2019-09-14 14:51:59'),
-(3, 'Port Test', 'test', 'NL', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', 1, 1, 1, 1, '2019-09-15 10:12:38', '2019-09-15 10:12:38');
+INSERT INTO `ports` (`id`, `name`, `city`, `country`, `contactperson`, `contactphone`, `contactemail`, `facilities`, `directions`, `parking`, `catering`, `skipper`, `flottielje`, `groceries`, `transfer`, `created_at`, `updated_at`) VALUES
+(2, 'Port Haven', 'Apeldoorn', 'NL', 'Willem', '0612345678', 'Willem@willem.com', 'Industrial Complex', '1', '1', '1', '1', '', '1', '1', '2019-09-14 14:51:59', '2019-09-14 14:51:59'),
+(3, 'Port Test', 'test', 'NL', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', '1', '1', '', '1', '1', '2019-09-15 10:12:38', '2019-09-15 10:12:38');
 
 -- --------------------------------------------------------
 
@@ -894,13 +873,13 @@ CREATE TABLE `user_roles` (
 
 CREATE TABLE `yachts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `Yachttypes_yachttypeID` int(11) DEFAULT NULL,
-  `Ports_portID` int(11) DEFAULT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Yachttypes_yachttypeID` int(10) UNSIGNED NOT NULL,
+  `Ports_portID` int(10) UNSIGNED NOT NULL,
+  `status` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -919,21 +898,21 @@ INSERT INTO `yachts` (`id`, `Yachttypes_yachttypeID`, `Ports_portID`, `status`, 
 
 CREATE TABLE `yachttypes` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `length` double DEFAULT NULL,
-  `depth` double DEFAULT NULL,
-  `engine` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sail` double DEFAULT NULL,
-  `onepersoncabins` int(11) DEFAULT NULL,
-  `twopersoncabins` int(11) DEFAULT NULL,
-  `beds` int(11) DEFAULT NULL,
-  `toilets` int(11) DEFAULT NULL,
-  `showers` int(11) DEFAULT NULL,
-  `gear` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `length` double NOT NULL,
+  `depth` double NOT NULL,
+  `engine` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sail` double NOT NULL,
+  `onepersoncabins` int(10) UNSIGNED NOT NULL,
+  `twopersoncabins` int(10) UNSIGNED NOT NULL,
+  `beds` int(10) UNSIGNED NOT NULL,
+  `toilets` int(10) UNSIGNED NOT NULL,
+  `showers` int(10) UNSIGNED NOT NULL,
+  `gear` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1022,12 +1001,6 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `paymentstatusmodel`
---
-ALTER TABLE `paymentstatusmodel`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1112,7 +1085,7 @@ ALTER TABLE `yachttypes`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1130,7 +1103,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `data_types`
@@ -1167,12 +1140,6 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `paymentstatusmodel`
---
-ALTER TABLE `paymentstatusmodel`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `permissions`
