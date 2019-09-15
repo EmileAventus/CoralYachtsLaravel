@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
 
-class Yachts extends AbstractWidget
+class Ports extends AbstractWidget
 {
     /**
      * The configuration array.
@@ -22,16 +22,16 @@ class Yachts extends AbstractWidget
      */
     public function run()
     {
-        $count = \App\Yacht::count();
-        $string = trans_choice('Yachts', $count);
+        $count = \App\Port::count();
+        $string = trans_choice('Ports', $count);
   
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-boat',
+            'icon'   => 'voyager-anchor',
             'title'  => "{$count} {$string}",
             'text'  => __( "" ),
             'button' => [
-                'text' => __('View all Yachts'),
-                'link' => route('voyager.yachts.index'),
+                'text' => __('View all Ports'),
+                'link' => route('voyager.ports.index'),
             ],
             'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
         ]));

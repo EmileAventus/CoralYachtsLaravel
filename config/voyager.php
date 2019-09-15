@@ -145,6 +145,10 @@ return [
 
         'widgets' => [
            'App\\Widgets\\Yachts',
+           'App\\Widgets\\Yachttypes',
+           'App\\Widgets\\Ports',
+           'App\\Widgets\\Customers',
+           'App\\Widgets\\Bookings'
         ],
 
     ],
