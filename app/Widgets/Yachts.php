@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Widgets;
+namespace app\Widgets;
 
 use Arrilot\Widgets\AbstractWidget;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +24,9 @@ class Yachts extends AbstractWidget
     {
         $count = Voyager::model('Post')->count();
         //$string = trans_choice('voyager::dimmer.post', $count);
+        
         $string = trans_choice('Needs a fix', $count);
-
+  
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-news',
             'title'  => "{$count} {$string}",
