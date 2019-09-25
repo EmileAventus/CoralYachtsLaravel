@@ -44,6 +44,6 @@ class Ports extends AbstractWidget
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('Post'));
+        return auth()->user()->hasRole("user");
     }
 }
